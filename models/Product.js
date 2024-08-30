@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 
 const product=new mongoose.Schema({
-   image:{
+   link:{
         type:String
    },
    name:{
