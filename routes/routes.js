@@ -7,7 +7,7 @@ const { adduser }=require('../controllers/adduser')
 const { addproduct }=require('../controllers/addproduct')
 const { getproducts }=require('../controllers/getproducts')
 const {getusers}=require("../controllers/getusers")
-const {getuserswithpasswordss}=require('../controllers/getuserwithpaswords')
+const {getuserswithpasswords}=require('../controllers/getuserwithpaswords')
 
 
 router.post("/addproduct",addproduct);
