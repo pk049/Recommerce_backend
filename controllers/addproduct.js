@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 exports.addproduct = async (req, res) =>
  {
     try {
-           const{link,name,price,product_type,quantity,similar_products}=req.body;
-           const Product = new product({link,name,price,product_type,quantity,similar_products});
+           const{link,name,price,product_type,quantity}=req.body;
+           const Product = new product({link,name,price,product_type,quantity});
            await Product.save();
            res.json({message: 'Product added successfully'});
 

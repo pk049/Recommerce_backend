@@ -1,4 +1,5 @@
 const mongoose=require("mongoose")
+const Product=require("../models/Product")
 
 const user=new mongoose.Schema({
     username:{
@@ -17,7 +18,8 @@ const user=new mongoose.Schema({
          type:String,
     }],
     cart:[{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:Product
     }],
     frequent_search:[{
         type:String
