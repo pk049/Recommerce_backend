@@ -15,6 +15,7 @@ const {getcart}=require('../controllers/getcart')
 const {getusersfull}=require('../controllers/getuserfull')
 // const {getproductbyid}=require('../controllers/getproductbyid')
 const {searchUnsplashPhotos}=require('../controllers/getimagewithapi')
+const {getproduct_byname}=require('../controllers/getproduct_byname');
 
 
 
@@ -27,6 +28,7 @@ router.get("/getusers", getusers);
 router.get("/getuserswithpasswords", getuserswithpasswords);
 router.get("/getcart",getcart)
 router.get("/getimg/:query",searchUnsplashPhotos)
+router.get("/getproductbyname/:productname",getproduct_byname)
 // router.get("/getproductbyid/:productid",getproductbyid)
 
 
