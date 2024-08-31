@@ -1,113 +1,48 @@
-// routes/product.js (or your routes file)
-
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Product'); // Import the product model
-const mongoose=require('mongoose')
+const mongoose = require('mongoose');
+const Product = require('../models/Product');
 
+// Importing controllers
 const { adduser } = require('../controllers/adduser');
 const { addproduct } = require('../controllers/addproduct');
 const { getproducts } = require('../controllers/getproducts');
 const { getusers } = require('../controllers/getusers');
 const { getuserswithpasswords } = require('../controllers/getuserwithpaswords');
-const {addtocart}=require('../controllers/addtocart')
-const {getcart}=require('../controllers/getcart')
-const {getusersfull}=require('../controllers/getuserfull')
-// const {getproductbyid}=require('../controllers/getproductbyid')
-const {searchUnsplashPhotos}=require('../controllers/getimagewithapi')
-const {getproduct_byname}=require('../controllers/getproduct_byname');
-
-
-
-
+const { addtocart } = require('../controllers/addtocart');
+const { getcart } = require('../controllers/getcart');
+const { getusersfull } = require('../controllers/getuserfull');
+const { getproductbyid } = require('../controllers/getproductbyid');
+const { searchUnsplashPhotos } = require('../controllers/getimagewithapi');
+const { getproduct_byname } = require('../controllers/getproduct_byname');
+const {getAllProducts,searchProducts}=require('../controllers/productcontroller')
+const {getProductsByType}=require('../controllers/getproductbytype')
 // Define routes
 router.post("/addproduct", addproduct);
 router.post("/adduser", adduser);
 router.get("/getproducts", getproducts);
 router.get("/getusers", getusers);
 router.get("/getuserswithpasswords", getuserswithpasswords);
-router.get("/getcart",getcart)
-router.get("/getimg/:query",searchUnsplashPhotos)
-router.get("/getproductbyname/:productname",getproduct_byname)
-// router.get("/getproductbyid/:productid",getproductbyid)
+router.get("/getcart", getcart);  // Fixed route to handle query parameters correctly
+router.get("/getimg/:query", searchUnsplashPhotos);
+router.get("/getproductbyname/:productname", getproduct_byname);
+router.get("/getproductbyid/:productid", getproductbyid);
+router.get('/getproducts', getAllProducts);
+router.post('/getproductbytype', getProductsByType);
+
+// Route to search for products
+router.get('/searchproducts',searchProducts);
 
 
 
 
-// Route to get a single product by name
-// In routes/product.js
 
-router.get('/getproductbyid', async (req, res) => {
-    try {
-        const { productid } = req.query;
+;
 
-   
-       
+// Route to add a product to the cart
+router.post('/addtocart', addtocart);
 
-        const productObjectId = new mongoose.Types.ObjectId(productid);
-        const singleProduct = await Product.findById(productObjectId);
+// Route to get full user details
+router.get('/getuserfull', getusersfull);
 
-        if (!singleProduct) {
-            return res.status(404).json({
-                status: 'fail',
-                message: 'Product not found'
-            });
-        }
-
-        res.status(200).json({
-            status: 'success',
-            data: singleProduct
-        });
-    } catch (err) {
-        res.status(500).json({
-            message: err.message,
-        });
-    }
-});
-
-// In routes/product.js
-
-// Route to get a single product by ID
-// In routes/product.js
-
-// Route to get a single product by ID using query parameters
-router.get('/getproductbyid', async (req, res) => {
-    try {
-        const { productid } = req.query; // Get the product ID from the query parameters
-
-        // Ensure productid is provided
-        if (!productid) {
-            return res.status(400).json({
-                status: 'fail',
-                message: 'Product ID is required'
-            });
-        }
-
-        // Convert productid to ObjectId
-        const productObjectId = new mongoose.Types.ObjectId(productid);
-
-        const singleProduct = await Product.findById(productObjectId); // Query the product by ID
-
-        if (!singleProduct) {
-            return res.status(404).json({
-                status: 'fail',
-                message: 'Product not found'
-            });
-        }
-
-        res.status(200).json({
-            status: 'success',
-            data: singleProduct
-        });
-    } catch (err) {
-        res.status(500).json({
-            message: err.message,
-        });
-    }
-});
-
-
-
-router.post('/addtocart',addtocart)
-router.get('/getuserfull',getusersfull)
 module.exports = router;
