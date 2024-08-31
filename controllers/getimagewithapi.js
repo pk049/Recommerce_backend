@@ -4,7 +4,7 @@ const axios = require('axios');
 const UNSPLASH_ACCESS_KEY = '3cjCutGEj4C9t3omJO5afkG7LG9bld6JbWpYVHflswY';
 
 exports.searchUnsplashPhotos=async(req, res) =>{
-    const { query } = req.params;
+    const { query } = req.query;
 
     if (!query) {
         return res.status(400).json({ error: 'Query parameter is required' });
@@ -21,7 +21,7 @@ exports.searchUnsplashPhotos=async(req, res) =>{
             },
         });
 
-        res.json({ results: response.data.results }); // Return the array of photo objects
+        res.json({ results: response.urls.small}); // Return the array of photo objects
     } catch (error) {
         console.error('Error fetching photos from Unsplash:', error.message);
         res.status(500).json({ error: 'Failed to fetch photos from Unsplash' });
