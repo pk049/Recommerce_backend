@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 exports.getproducts = async (req, res) =>
  {
     try {
-        const products = await product.find().sort({ total_buys: -1 });
-       res.status.json({
+        const products = await product.find()
+       res.status(200).json({
         status: 'success',
         data:products
        })
